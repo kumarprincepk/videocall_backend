@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 io.on("connection", (socket) => {
 	socket.emit("me", socket.id);
-
+console.log("id", socket.id)
 	socket.on("disconnect", () => {
 		socket.broadcast.emit("callEnded")
 	});
@@ -30,6 +30,7 @@ io.on("connection", (socket) => {
 
 	socket.on("answerCall", (data) => {
 		io.to(data.to).emit("callAccepted", data.signal)
+		console.log("SINGNAL",data.signal)
 	});
 });
 
